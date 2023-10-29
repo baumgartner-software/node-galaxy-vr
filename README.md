@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/baumgartner-software/node-galaxy-vr/main/icon.jpeg" width="256" height="256" alt="Node Galaxy VR Icon">
+</p>
+
+
 # Node Galaxy VR
 
 Node Galaxy VR provides an immersive environment to visualize and interact with graphs, showcasing nodes and edges within a virtual reality space.
