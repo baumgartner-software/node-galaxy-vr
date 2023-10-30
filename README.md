@@ -7,6 +7,11 @@
 
 Node Galaxy VR provides an immersive environment to visualize and interact with graphs, showcasing nodes and edges within a virtual reality space.
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/baumgartner-software/node-galaxy-vr/main/787BC469-4168-4853-AD1E-27FA6FA7F2AD.gif" width="256" height="256" alt="Node Galaxy VR Icon">
+</p>
+
+
 **Disclaimer**: This project is open source; however, all rights are reserved. The current version is in beta. While it's not available in the Meta Quest 3 store, advanced users can manually install the APK with developer mode enabled on their Meta Quest 3 devices.
 
 ## Current Features
