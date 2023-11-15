@@ -19,6 +19,7 @@ Node Galaxy VR provides an immersive environment to visualize and interact with 
 - **Meta Quest 3 Compatibility**: Fully supported on the Meta Quest 3 platform.
 - **Scene Variety**: Choose between various scenes, including Passthrough, White Grid, and Dark Grid.
 - **File Interaction**: Capability to load graph data from local JSON storage.
+- **Shapes**: Allow different simple shapes
 
 ## Transpiler
 
@@ -49,7 +50,7 @@ https://github.com/baumgartner-software/node-galaxy-vr-transpile
   - Maybe it is the amount of nodes? Maybe add a warning when there are more than X nodes (test X for a stable number)
   - Efforts to achieve a higher and more consistent FPS.
 - [medium] Shapes:
-  - Allow different simple shapes:
+  
     - 1. Allowing int the "nodes.json" file that each node can give its shape: [tetrahedron, cube, octahedron, dodecahedron, icosahedron] (https://danielsieger.com/blog/2021/01/03/generating-platonic-solids.html) (https://en.wikipedia.org/wiki/Platonic_solid)
       - Each node can have a field: "shape" (if not, the use default shape: our sphere)
     - 2. Or global option in Main-Menu to change shape of all nodes, if 1. is not possible
@@ -102,6 +103,12 @@ https://github.com/baumgartner-software/node-galaxy-vr-transpile
     - Selecting this using "Trigger Button" spawns a Node directly infront of the user. He then can grab the Node using the "Drag and Reposition" feature
   - "Create Edge":
     - Selecting this using "Trigger Button" spawns a small edge/line directly infront of the user. The edge is rendered between the point in the air and the controller. He then needs to select the first node using "Trigger Button". After that the edge is rendered between the node and the controller. He then needs to select the second node.
+
+## Installation & Build
+
+- [Mac] Look at README_IMPORT_MAC.md
+- Open Unity Hub & add the project & open the project
+- In Unity --> File --> Build Settings --> Android --> Build --> "nodeGalaxy.apk"
 
 
 ## Feedback

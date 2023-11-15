@@ -25,20 +25,11 @@ public class PermissionsRequester : MonoBehaviour
     {
         switch (permissionName)
         {
-            case Permission.Microphone:
-                Permission.RequestUserPermission(Permission.Microphone);
-                break;
-            case Permission.Camera:
-                Permission.RequestUserPermission(Permission.Camera);
-                break;
             case Permission.ExternalStorageRead:
                 Permission.RequestUserPermission(Permission.ExternalStorageRead);
                 break;
             case Permission.ExternalStorageWrite:
                 Permission.RequestUserPermission(Permission.ExternalStorageWrite);
-                break;
-            case Permission.FineLocation:
-                Permission.RequestUserPermission(Permission.FineLocation);
                 break;
         }
     }
@@ -60,20 +51,11 @@ public class PermissionsRequester : MonoBehaviour
     {
         switch (permissionName)
         {
-            case Permission.Microphone:
-                Permission.RequestUserPermission(Permission.Microphone);
-                break;
-            case Permission.Camera:
-                Permission.RequestUserPermission(Permission.Camera);
-                break;
             case Permission.ExternalStorageRead:
                 Permission.RequestUserPermission(Permission.ExternalStorageRead);
                 break;
             case Permission.ExternalStorageWrite:
                 Permission.RequestUserPermission(Permission.ExternalStorageWrite);
-                break;
-            case Permission.FineLocation:
-                Permission.RequestUserPermission(Permission.FineLocation);
                 break;
         }
     }

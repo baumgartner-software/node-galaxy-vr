@@ -10,6 +10,9 @@ Here's the solution:
 2. Enter the command: xattr -d com.apple.quarantine /.../Assets/Plugins/Whatever.bundle
 3. Do this for every .bundle you have, and they once again work.
 
+xattr -d com.apple.quarantine ./Assets/Oculus/Spatializer/Plugins/AudioPluginOculusSpatializer.bundle
+
+
 
 See more information on the command here:
 https://www.unix.com/man-page/osx/1/xattr/

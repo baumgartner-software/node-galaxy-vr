@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Grid Dark Scene.unity
     guid: f85619a79fb734b43a437efe2bd584e5
+  - enabled: 1
+    path: Assets/Oculus/VR/Scenes/VirtualKeyboard.unity
+    guid: c9684441ee1da1244a223118fdaa5d13
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 48691087eca1c8142a9e5f7d80b2646f, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: c1cc0596a07ff7e42bdda392dd4cce8a, type: 2}

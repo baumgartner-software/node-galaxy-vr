@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -9,37 +10,64 @@ public class JsonParser : MonoBehaviour
     private GameObject m_NodePrefab = null;
     [SerializeField]
     private Material m_LineMaterial = null;
+    [SerializeField]
+    private NodeInfoPanel m_NodeInfoPanel = null;
 
     private Dictionary<string, NodeData> m_nodeInfoDictionary;
-    private HashSet<string> m_visitedNodes;
-    private List<HashSet<string>> m_groups;
 
-    private List<LineRenderer> m_LineRenderers;
+    private string m_CurrentFileName = "";
 
+
+#if UNITY_EDITOR
+    private void Start()
+    {
+        LoadNodes("");
+    }
+#endif
+
+    public void UpdateNodeInfo(string key, string id, string text, string additional, string shape)
+    {
+        m_nodeInfoDictionary[key].Id = id;
+        m_nodeInfoDictionary[key].Text = text;
+        m_nodeInfoDictionary[key].Additional = additional;
+        m_nodeInfoDictionary[key].Shape = shape;
+
+        SaveNodes();
+    }
 
 
     public void LoadNodes(string fileName)
     {
+        m_CurrentFileName = fileName;
+
+        // Clear out the existing Nodes
         foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
         }
 
+
+#if UNITY_EDITOR
+        TextAsset textAsset = Resources.Load<TextAsset>("Nodes");
+        string jsonString = textAsset.text;
+
+        // -----------------
+#else
         string jsonString = ReadExternalFile($"{Application.persistentDataPath}/{fileName}");
+#endif
+        // ------------------
 
         m_nodeInfoDictionary = JsonConvert.DeserializeObject<Dictionary<string, NodeData>>(jsonString);
-        m_visitedNodes = new HashSet<string>();
-        m_groups = new List<HashSet<string>>();
-        m_LineRenderers = new List<LineRenderer>();
 
         foreach (var entry in m_nodeInfoDictionary)
         {
             Node node = Instantiate(m_NodePrefab).GetComponent<Node>();
             node.transform.parent = transform;            
 
-            node.Initialize(entry.Value);
+            node.Initialize(entry.Key, entry.Value, m_NodeInfoPanel);
 
-            float lineWidth = m_NodePrefab.transform.localScale.x / 5f;
+            float lineWidth = entry.Value.Size / 5f;
+
             foreach (var connection in entry.Value.Edges)
             {
                 GameObject lrObject = new GameObject();
@@ -72,5 +100,36 @@ public class JsonParser : MonoBehaviour
             return File.ReadAllText(fullPath);
         }
         return null;
+    }
+
+
+    public void SaveNodes()
+    {
+        // Serialize the dictionary to a JSON string
+        string jsonString = JsonConvert.SerializeObject(m_nodeInfoDictionary, Formatting.Indented);
+
+        // Write the JSON string to an external file
+        WriteExternalFile($"{Application.persistentDataPath}/{m_CurrentFileName}", jsonString);
+    }
+
+    public void WriteExternalFile(string path, string dataToWrite)
+    {
+        // Get the external storage directory just like in the ReadExternalFile method
+        AndroidJavaClass environmentClass = new AndroidJavaClass("android.os.Environment");
+        AndroidJavaObject externalStorageDirectory = environmentClass.CallStatic<AndroidJavaObject>("getExternalStorageDirectory");
+        string externalPath = externalStorageDirectory.Call<string>("getAbsolutePath");
+
+        // Combine the external directory with your file path
+        string fullPath = Path.Combine(externalPath, path);
+
+        // Make sure the directory exists before writing to prevent exceptions
+        string directory = Path.GetDirectoryName(fullPath);
+        if (!Directory.Exists(directory))
+        {
+            Directory.CreateDirectory(directory);
+        }
+
+        // Write the JSON string to the specified path
+        File.WriteAllText(fullPath, dataToWrite);
     }
 }
